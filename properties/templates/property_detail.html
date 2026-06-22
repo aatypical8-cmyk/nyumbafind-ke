@@ -1,0 +1,119 @@
+<!-- Top Navigation -->
+<div class="bg-white shadow-sm sticky top-0 z-50 border-b">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <span class="text-3xl"></span>
+            <h1 class="text-2xl font-bold text-green-700">NyumbaFind KE</h1>
+        </div>
+
+        <div class="flex items-center gap-4">
+            {% if user.is_authenticated %}
+                <span class="text-gray-700">Hi, {{ user.name }} 👋</span>
+                <a href="/my-properties/" class="text-green-600 hover:underline">My Houses</a>
+                <a href="/logout/" class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl text-sm font-medium">
+                    Logout
+                </a>
+            {% else %}
+                 <a href="/login/" class="text-green-600 hover:underline">Login</a>
+                 <a href="/register/" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-xl text-sm font-medium">
+                     Register
+                 </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>{{ property.title }} - NyumbaFind KE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-4xl mx-auto p-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-green-700 flex items-center gap-2">
+                🏘️ NyumbaFind KE
+            </h1>
+            <a href="/" class="text-green-600 hover:underline">← Back Home</a>
+        </div>
+
+        <!-- Image Gallery -->
+        {% if property.images.all %}
+            <div class="space-y-6 mb-8">
+                {% for img in property.images.all %}
+                     <img src="{{ img.image.url }}"
+                          class="w-full rounded-3xl shadow-xl"
+                          alt="{{ property.title }}">
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="w-full h-96 bg-gray-200 rounded-3xl flex items-center justify-center mb-8">
+                <span class="text-6xl">🏘️</span>
+            </div>
+        {% endif %}
+
+        <!-- Property Info -->
+        <div class="bg-white rounded-3xl shadow-xl p-8">
+            <h2 class="text-3xl font-bold text-gray -900 mb-1">{{ property.title }}</h2>
+            <p class="text-xl text-gray-600 mb-6">{{ property.town }}, {{ property.county }}</p>
+
+            <!-- Price & Rooms -->
+            <div class="flex flex-wrap gap-8 mb-8">
+                <div>
+                   <p class="text-4xl font-bold text-green-700">Ksh {{ property.price }}</p>
+                    <p class="text-sm text-gray-500">Per Month</p>
+                </div>
+
+                <div class="flex items-center gap-6 text-2xl">
+                    <div class="flex items-center gap-2">
+                        <span>🛏️</span>
+                        <strong>{{ property.bedrooms }}</strong> Bedroom
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span>🚿</span>
+                        <strong>{{ property.bathrooms }}</strong> Bathroom
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="prose max-w-none mb-10">
+                <p class="text-lg leading-relaxed text-gray-700">{{ property.description }}</p>
+            </div>
+
+            <!-- WhatsApp Button -->
+            <div class="bg-green-50 rounded-3xl p-8 text-center">
+                <h3 class="text-2xl font-semibold mb-4">Interested in this house?</h3>
+
+                {% if property.landlord.profile.phone_number %}
+                    <a href="https://wa.me/254{{ property.landlord.profile.phone_number|slice:'1:'|default:'700000000 or 100000000' }}?text=Hello,%20{{ property.landlord.username }}!%20is%20{{ property.title }}%20in%20{{ property.town }}%20 available%3F"
+                       target="_blank"
+                       class="inline-block w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-semibold text-xl">
+                        🗨Chat on WhatsApp
+                    </a>
+                {% else %}
+                    <a href="https://wa.me/2547XXXXXXX?text=Hello!%20Is%20{{ property.title }}%20available?%20..."
+                       target="_blank"
+                       class="inline-block w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-semibold text-xl">
+                        Chat on WhatsApp
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<footer class="bg-gray-900 text-white py-12 mt-16">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+        <p class="text-xl font-semibold mb-2">NyumbaFind KE</p>
+        <P class="text-gray-400">Connecting Landlords & Tenants Across Kenya</P>
+        <p class="text-sm text-gray-500 mt-8">© 2026 NyumbaFind KE. All Rights Reserved.</p>
+    </div>
+</footer>
+
+

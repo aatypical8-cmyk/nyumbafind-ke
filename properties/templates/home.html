@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NyumbaFind KE - Post & Find Houses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Navigation -->
+    <div class="bg-white shadow-sm sticky top-0 z-50 border-b">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">🏠</span>
+                <h1 class="text-2xl font-bold text-green-700">NyumbaFind KE</h1>
+            </div>
+
+            <div class="flex items-center gap-4">
+                {% if user.is_authenticated %}
+                    <span class="text-gray-700 font-medium">Hi, {{ user.username }} 👋</span>
+                    <a href="/my-properties/" class="text-green-600 hover:underline font-medium">My Houses</a>
+                    <a href="/logout/"
+                       class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl text-sm font-medium">
+                        Logout
+                    </a>
+                {% else %}
+                    <a href="/login/" class="text-green-600 hover:underline font-medium">Login</a>
+                    <a href="/register/"
+                       class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-xl text-sm font-medium">
+                        Register
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Success / Error Messages -->
+    {% if messages %}
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            {% for message in messages %}
+                <div class="{% if message.tags == 'success' %}bg-green-100 border border-green-400 text-green-700{% elif message.tags == 'error' %}bg-red-100 border border-red-400 text-red-700{% else %}bg-blue-100 border border-blue-400 text-blue-700{% endif %} px-6 py-3 rounded-2xl">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-green-700 to-green-600 text-white py-20">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="text-5xl font-bold mb-4">Pata Dream House Yako Kenya Mzima</h2>
+            <p class="text-xl mb-8">Post and Find Houses Across Kenya 🇰🇪</p>
+        </div>
+    </div>
+
+    <!-- Search & Filter -->
+    <div class="max-w-6xl mx-auto px-6 -mt-8 relative z-10">
+        <div class="bg-white rounded-3xl shadow-xl p-6">
+            <form method="GET" class="flex flex-wrap gap-4 items-end">
+                <div class="flex-1 min-w-[220px]">
+                    <input type="text" name="search" value="{{ search_query }}"
+                           placeholder="Search location, town or title..."
+                           class="w-full border border-gray-300 rounded-2xl px-5 py-4 focus:outline-none focus:border-green-500">
+                </div>
+
+                <div class="min-w-[160px]">
+                    <select name="county" class="w-full border border-gray-300 rounded-2xl px-5 py-4 focus:outline-none focus:border-green-500">
+                        {% for code, name in counties %}
+                            <option value="{{ code }}" {% if selected_county == code %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="min-w-[160px]">
+                    <input type="number" name="min_price" placeholder="Min Price (KSh)"
+                           class="w-full border border-gray-300 rounded-2xl px-5 py-4 focus:outline-none focus:border-green-500">
+                </div>
+
+                <button type="submit"
+                        class="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-2xl font-semibold whitespace-nowrap">
+                    🔍 Search
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Latest Houses -->
+    <div class="max-w-6xl mx-auto px-6 py-12">
+        <h3 class="text-2xl font-bold mb-8">Latest Available Houses</h3>
+
+        {% if properties %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for property in properties %}
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-xl transition">
+                {% if property.images.all %}
+                    <img src="{{ property.images.first.image.url }}"
+                         class="w-full h-56 object-cover"
+                         alt="{{ property.title }}">
+                {% else %}
+                    <div class="w-full h-56 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">🏠</span>
+                    </div>
+                {% endif %}
+
+                <div class="p-6">
+                    <h4 class="font-semibold text-xl mb-1">{{ property.title }}</h4>
+                    <p class="text-gray-600">{{ property.town }}, {{ property.county }}</p>
+
+                    <div class="flex justify-between items-center my-4">
+                        <p class="text-2xl font-bold text-green-700">KSh {{ property.price }}</p>
+                        <p class="text-sm bg-green-100 text-green-700 px-3 py-1 rounded-full">
+                            {{ property.bedrooms }} Bed • {{ property.bathrooms }} Bath
+                        </p>
+                    </div>
+
+                    <a href="{% url 'property_detail' property.pk %}"
+                       class="block w-full text-center bg-green-600 hover:bg-green-700 text-white py-3 rounded-2xl font-medium">
+                        Check Details
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <p class="text-center text-gray-500 py-12 text-xl">No houses found matching your search.</p>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <span class="text-4xl">🏠</span>
+                <p class="text-2xl font-bold">NyumbaFind KE</p>
+            </div>
+            <p class="text-gray-400 mb-2">Connecting Landlords & Tenants Across Kenya 🇰🇪</p>
+            <p class="text-sm text-gray-500">© 2026 NyumbaFind KE. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
