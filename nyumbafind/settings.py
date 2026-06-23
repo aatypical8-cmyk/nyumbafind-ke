@@ -128,3 +128,25 @@ import os
   # Media Files (House Photos)
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# PWA Settings
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# For PWA
+PWA_APP_NAME = "NyumbaFind KE"
+PWA_APP_DESCRIPTION = "Post and Find Houses Across Kenya"
+PWA_APP_THEME_COLOR = "#166534"
+PWA_APP_BACKGROUND_COLOR = "#166534"
+PWA_APP_DISPLAY = "standalone"
+PWA_APP_START_URL = "/"
+PWA_APP_ICONS = [
+    {
+        "src": "/static/icon-192.png",
+        "sizes": "192x192"
+    },
+    {
+        "src": "/static/icon-512.png",
+        "sizes": "512x512"
+    }
+]
