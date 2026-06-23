@@ -150,3 +150,14 @@ PWA_APP_ICONS = [
         "sizes": "512x512"
     }
 ]
+
+# Security settings for deployment
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.up.railway.app',
+    'https://web-production-3188e.up.railway.app'
+]
+
+ALLOWED_HOSTS = ['*']
+
+# Make sure this is False in production
+DEBUG = False
