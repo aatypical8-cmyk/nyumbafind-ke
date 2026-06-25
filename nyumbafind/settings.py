@@ -148,10 +148,17 @@ PWA_APP_ICONS = [
 ]
 
 # Security settings for deployment
+DEBUG = False
+ALLOWED_HOSTS = ['*']
+
 CSRF_TRUSTED_ORIGINS = [
+    'https://*.up.railway.app',
     'https://*.up.railway.app',
     'https://web-production-3188e.up.railway.app'
 ]
 
-ALLOWED_HOSTS = ['*']
-DEBUG = False
+# Security settings for production
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
