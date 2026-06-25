@@ -23,9 +23,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-21zdqe*t&!9vjm4na9kpdxf#$6gvkt+)7ye_ufoztz6#!w(=77'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['.up.railway.app', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -130,7 +127,6 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # PWA Settings
-STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # For PWA
@@ -158,6 +154,4 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 ALLOWED_HOSTS = ['*']
-
-# Make sure this is False in production
 DEBUG = False
