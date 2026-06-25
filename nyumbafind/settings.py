@@ -117,10 +117,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # Authentication settings
-LOGIN_REDIRECTED_URL = 'home'
-LOGOUT_REDIRECTED_URL = 'home'
-
-import os
 
   # Media Files (House Photos)
 MEDIA_URL = 'media/'
@@ -153,12 +149,12 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://*.up.railway.app',
-    'https://*.up.railway.app',
-    'https://web-production-3188e.up.railway.app'
+    'https://*.up.railway.app'
 ]
 
 # Security settings for production
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
+SECURE_SSL_REDIRECT = False
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+LOGIN_REDIRECTED_URL = '/'
+LOGOUT_REDIRECTED_URL = '/'
