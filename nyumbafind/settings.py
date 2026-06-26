@@ -3,18 +3,26 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-your-secret-key-here-change-in-production'
-
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://*.railway.app',
-    'https://*.up.railway.app',
+    'https://*up.railway.app',
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+LOGIN_REDIRECT_URL ='home'
+LOGOUT_REDIRECT_URL = 'home'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
