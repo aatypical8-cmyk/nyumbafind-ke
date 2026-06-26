@@ -9,13 +9,13 @@
 <body class="bg-gray-50">
     <div class="max-w-md mx-auto p-6 mt-10">
         <div class="bg-white rounded-3xl shadow-2xl p-8">
-            <h1 class="text-3xl font-bold text-green-700 text-center mb-2">Jiunge Nasi</h1>
+            <h1 class="text-3xl font-bold text-green-700 text-center mb-2">Join Us</h1>
             <p class="text-center text-gray-600 mb-8">Create your Landlord Account</p>
 
             {% if form.errors %}
                 <div class="bg-red-100 border border-red-400 text-red-700 px-5 py-4 rounded-2xl mb-6">
                     {% for field in form %}
-                        {% for error in field.errors %}
+                        {% for error in field. Errors %}
                             <p class="text-sm">• {{ error }}</p>
                         {% endfor %}
                     {% endfor %}
@@ -54,8 +54,8 @@
             </form>
 
             <p class="text-center mt-6 text-gray-600">
-                Unayo akaunti?
-                <a href="/login/" class="text-green-600 font-medium hover:underline">Login hapa</a>
+                Already have an Account?
+                <a href="/login/" class="text-green-600 font-medium hover:underline">Login</a>
             </p>
         </div>
     </div>

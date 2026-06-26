@@ -1,10 +1,12 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
 from .models import Property, PropertyImage, Profile
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate
+from django.contrib import messages
+from django.shortcuts import render, redirect
 
 # =========== HOME WITH SEARCH & FILTER =========
 def home(request):
@@ -192,28 +194,30 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, f"Welcome {user.username}! Account created successfully.")
+            messages.success(request, f'Welcome {user.username}! Account created successfully.')
             return redirect('home')
         else:
-            print(form.errors)
+            messages.error(request, 'Please correct the errors below.')
     else:
         form = UserCreationForm()
+
     return render(request, 'register.html', {'form': form})
 
 
 def user_login(request):
     if request.method == 'POST':
-        from django.contrib.auth import authenticate
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
             login(request, user)
+            messages.success(request, f'Welcome back, {user.username}!')
             return redirect('home')
         else:
-            pass
-    return render(request, 'login.html')
+            messages.error(request, 'Invalid username or password.')
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form': form})
 
 
 @login_required()
