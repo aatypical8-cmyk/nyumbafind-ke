@@ -7,24 +7,32 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50">
-    <div class="max-w-md mx-auto p-6 mt-12">
+    <div class="max-w-md mx-auto p-6 mt-10">
         <div class="bg-white rounded-3xl shadow-2xl p-8">
-            <h1 class="text-3xl font-bold text-green-700 text-center mb-2">Login</h1>
-            <p class="text-center text-gray-600 mb-8">Welcome back to NyumbaFind</p>
+            <h1 class="text-3xl font-bold text-green-700 text-center mb-2">Karibu Tena</h1>
+            <p class="text-center text-gray-600 mb-8">Login to your account</p>
 
-            <form method="POST" class="space-y-5">
+            {% if form.errors %}
+                <div class="bg-red-100 border border-red-400 text-red-700 px-5 py-4 rounded-2xl mb-6">
+                    <p>Invalid username or password. Please try again.</p>
+                </div>
+            {% endif %}
+
+            <form method="POST" class="space-y-6">
                 {% csrf_token %}
 
-                 <div>
+                <div>
                     <label class="block text-sm font-medium mb-2">Username</label>
                     <input type="text" name="username" required
-                           class="w-full border border-gray-300 rounded-xl px-4 py-3">
+                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:border-green-500">
                 </div>
 
-                <div>
+                <div class="relative">
                     <label class="block text-sm font-medium mb-2">Password</label>
-                    <input type="password" name="password" required
-                           class="w-full border border-gray-300 rounded-xl px-4 py-3">
+                    <input type="password" name="password" id="password" required
+                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:border-green-500">
+                    <span onclick="togglePassword('password')" id="password_icon"
+                          class="absolute right-4 top-10 cursor-pointer text-2xl">👁️</span>
                 </div>
 
                 <button type="submit"
@@ -34,19 +42,24 @@
             </form>
 
             <p class="text-center mt-6 text-gray-600">
-                Don't have an account?
-                <a href="/register/" class="text-green-600 font-medium hover:underline">Create account</a>
-
+                Huna akaunti?
+                <a href="/register/" class="text-green-600 font-medium hover:underline">Jiunge hapa</a>
             </p>
         </div>
     </div>
+
+    <script>
+        function togglePassword(id) {
+            const field = document.getElementById(id);
+            const icon = document.getElementById(id + '_icon');
+            if (field.type === "password") {
+                field.type = "text";
+                icon.textContent = "🙈";
+            } else {
+                field.type = "password";
+                icon.textContent = "👁️";
+            }
+        }
+    </script>
 </body>
 </html>
-
-<footer class="bg-gray-900 text-white py-12 mt-16">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-        <p class="text-xl font-semibold mb-2">NyumbaFind KE</p>
-        <P class="text-gray-400">Connecting Landlords & Tenants Across Kenya</P>
-        <p class="text-sm text-gray-500 mt-8">© 2026 NyumbaFind KE. All Rights Reserved.</p>
-    </div>
-</footer>
