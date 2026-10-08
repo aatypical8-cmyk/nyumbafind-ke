@@ -15,7 +15,7 @@
             {% if form.errors %}
                 <div class="bg-red-100 border border-red-400 text-red-700 px-5 py-4 rounded-2xl mb-6">
                     {% for field in form %}
-                        {% for error in field. Errors %}
+                        {% for error in field.errors %}
                             <p class="text-sm">• {{ error }}</p>
                         {% endfor %}
                     {% endfor %}

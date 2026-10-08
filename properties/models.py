@@ -19,11 +19,9 @@ COUNTIES = [('Nairobi', 'Nairobi'),
 
 class Property(models.Model):
     """Model for rental properties/houses"""
-
     # House Details
     title = models.CharField(max_length=200, verbose_name="Tittle")
     description = models.TextField(verbose_name="Description")
-
 
     # Location (Kenya specific)
     county = models.CharField(max_length=100, verbose_name="County")
@@ -47,7 +45,6 @@ class Property(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return f"{self.title} - {self.town} ({self.county})"
-
     class Meta:
         verbose_name = "Property"
         verbose_name_plural = "Properties"

@@ -10,6 +10,7 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('my-properties/', views.my_properties, name='my_properties'),
     path('edit-property/<int:pk>/', views.edit_property, name='edit_property'),
-        path('delete-property/<int:pk>/', views.delete_property, name='delete_property'),
+    path('delete-property/<int:pk>/', views.delete_property, name='delete_property'),
+
     path('profile/', views.profile, name='profile'),
 ]

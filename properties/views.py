@@ -107,7 +107,6 @@ def home(request):
     ]
 
     properties = Property.objects.filter(is_available=True).order_by('-created_at')
-
     search_query = request.GET.get('search', '')
     county = request.GET.get('county', '')
     min_price = request.GET.get('min_price', '')
@@ -170,7 +169,6 @@ def post_property(request):
                     if index == 0:
                         property_obj.image = image
                         property_obj.save()
-
 
                     uploaded_count += 1
 
