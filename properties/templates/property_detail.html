@@ -32,7 +32,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50">
-    <div class="max-w-4xl mx-auto p-6">
+    <div class="max-w-4xl mx-auto p-4 sm:p-6">
         <!-- Header -->
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-green-700 flex items-center gap-2">
@@ -58,17 +58,17 @@
 
         <!-- Property Info -->
         <div class="bg-white rounded-3xl shadow-xl p-8">
-            <h2 class="text-3xl font-bold text-gray -900 mb-1">{{ property.title }}</h2>
-            <p class="text-xl text-gray-600 mb-6">{{ property.town }}, {{ property.county }}</p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">{{ property.title }}</h2>
+            <p class="text-lg sm:text-xl text-gray-600 mb-6">{{ property.town }}, {{ property.county }}</p>
 
             <!-- Price & Rooms -->
             <div class="flex flex-wrap gap-8 mb-8">
                 <div>
-                   <p class="text-4xl font-bold text-green-700">Ksh {{ property.price }}</p>
+                   <p class="text-3xl sm:text-4xl font-bold text-green-700">Ksh {{ property.price }}</p>
                     <p class="text-sm text-gray-500">Per Month</p>
                 </div>
 
-                <div class="flex items-center gap-6 text-2xl">
+                <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-lg sm:text-2xl">
                     <div class="flex items-center gap-2">
                         <span>🛏️</span>
                         <strong>{{ property.bedrooms }}</strong> Bedroom
@@ -92,7 +92,7 @@
                 {% if property.landlord.profile.phone_number %}
                     <a href="https://wa.me/254{{ property.landlord.profile.phone_number|slice:'1:'|default:'700000000 or 100000000' }}?text=Hello,%20{{ property.landlord.username }}!%20is%20{{ property.title }}%20in%20{{ property.town }}%20 available%3F"
                        target="_blank"
-                       class="inline-block w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-semibold text-xl">
+                       class="inline-block w-full sm:w-auto sm:px-16 mx-auto bg-green-600 hover:bg-green-700 text-white py-4 sm:py-5 rounded-2xl font-semibold text-xl">
                         🗨Chat on WhatsApp
                     </a>
                 {% else %}
