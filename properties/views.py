@@ -249,12 +249,15 @@ def edit_property(request, pk):
 
             # Handle new images (if uploaded)
             images = request.FILES.getlist('images')
-            for image in images:
+            for index, image in enumerate(images):
                 if image:
                     PropertyImage.objects.create(
                         property=property_obj,
                         image=image
                     )
+                    if index == 0:
+                        property_obj.image = image
+                        property_obj.save()
             messages.success(request, 'House Successfully Updated✅')
             return redirect('my_properties')
         except Exception as e:
