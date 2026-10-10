@@ -24,7 +24,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'properties',
+    'cloudinary_storage',
+    'cloudinary',
 ]
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_URL=cloudinary://637291241727791:QGXZaTWw8y3aAuJMjTneAj8vC8U@mfho6mc1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,6 +61,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nyumbafind.wsgi.application'
 import dj_database_url
+
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///db.sqlite3',
