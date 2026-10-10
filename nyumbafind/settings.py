@@ -29,7 +29,6 @@ INSTALLED_APPS = [
 ]
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-CLOUDINARY_URL=cloudinary://637291241727791:QGXZaTWw8y3aAuJMjTneAj8vC8U@mfho6mc1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
