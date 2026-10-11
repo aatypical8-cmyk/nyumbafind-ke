@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="sw">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit House - NyumbaFind KE</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50">
+{% extends 'base.html' %}
+
+{% block title %}Edit House - NyumbaFind KE{% endblock %}
+
+{% block content %}
 <div class="max-w-2xl mx-auto p-6 mt-8">
     <div class="bg-white rounded-3xl shadow-2xl p-8">
         <h1 class="text-3xl font-bold text-green-700 text-center mb-2">Edit House</h1>
@@ -23,7 +19,7 @@
 
             <div>
                 <label class="block text-sm font-medium mb-2">County</label>
-                <input tyep="text" name="county" value="{{ property.county }}" required
+                <input type="text" name="county" value="{{ property.county }}" required
                        class="w-full border border-gray-300 rounded-xl px-4 py-3">
             </div>
 
@@ -48,7 +44,7 @@
                 <div>
                     <label class="block text-sm font-medium mb-2">Bathrooms</label>
                     <input type="number" name="bathrooms" value="{{ property.bathrooms }}" required
-                           class="w-full border border-gray-300 rounded-xl px-4 py3">
+                           class="w-full border border-gray-300 rounded-xl px-4 py-3">
                 </div>
             </div>
 
@@ -64,12 +60,11 @@
                           class="w-full border border-gray-300 rounded-xl px-4 py-3">{{ property.description }}</textarea>
             </div>
 
-            <!-- Image Upload -->
             <div>
                 <label class="block text-sm font-medium mb-2">Change Image (Optional)</label>
                 <input type="file" name="images" accept="image/*" multiple
                        class="w-full border border-gray-300 rounded-xl px-4 py-3">
-                <p class="text-xs text-grsay-500 mt-1">Leave empty to keep current images</p>
+                <p class="text-xs text-gray-500 mt-1">Leave empty to keep current images</p>
             </div>
 
             <div class="flex gap-4 pt-4">
@@ -85,15 +80,4 @@
         </form>
     </div>
 </div>
-</body>
-<body>
-</body>
-</html>
-
-<footer class="bg-gray-900 text-white py-12 mt-16">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-        <p class="text-xl font-semibold mb-2">NyumbaFind KE</p>
-        <P class="text-gray-400">Connecting Landlords & Tenants Across Kenya</P>
-        <p class="text-sm text-gray-500 mt-8">© 2026 NyumbaFind KE. All Rights Reserved.</p>
-    </div>
-</footer>
+{% endblock %}
