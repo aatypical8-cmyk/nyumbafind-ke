@@ -107,7 +107,7 @@ def home(request):
     ]
 
     properties = Property.objects.filter(is_available=True).order_by('-created_at')
-    search_query = request.GET.get('search', '')
+    search_query = request.GET.get('q', '')
     county = request.GET.get('county', '')
     min_price = request.GET.get('min_price', '')
 
