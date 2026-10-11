@@ -167,6 +167,7 @@ def post_property(request):
                     )
 
                     if index == 0:
+                        image.seek(0)
                         property_obj.image = image
                         property_obj.save()
 
@@ -256,8 +257,10 @@ def edit_property(request, pk):
                         image=image
                     )
                     if index == 0:
+                        image.seek(0)
                         property_obj.image = image
                         property_obj.save()
+
             messages.success(request, 'House Successfully Updated✅')
             return redirect('my_properties')
         except Exception as e:
